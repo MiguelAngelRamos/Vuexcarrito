@@ -8,6 +8,9 @@ export default createStore({
   mutations: {
     setProductos(state, payload) {
       state.productos = payload
+    },
+    setCarrito(state, payload) {
+      state.carrito[payload.id] = payload;
     }
   },
   actions: {
@@ -20,6 +23,11 @@ export default createStore({
       } catch (error) {
         throw error;
       }
+    },
+    agregarAlCarrito({commit, state}, producto) {
+      // hasOwnProperty devuelve un booleano indicado si existe una propiedad especifica en el objeto
+      state.carrito.hasOwnProperty(producto.id)? producto.cantidad = state.carrito[producto.id].cantidad + 1:producto.cantidad=1;
+      commit('setCarrito', producto);
     }
   },
   getters: {
