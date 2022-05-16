@@ -1,18 +1,18 @@
 <template>
-  <div class="home">
-    <img alt="Vue logo" src="../assets/logo.png">
-    <HelloWorld msg="Welcome to Your Vue.js App"/>
-  </div>
+ <Layout>
+   <h3>Producto de la tienda</h3>
+   <div class="row">
+     
+   </div>
+ </Layout>
 </template>
 
 <script>
-// @ is an alias to /src
-import HelloWorld from '@/components/HelloWorld.vue'
-
+import { defineAsyncComponent } from 'vue';
 export default {
   name: 'HomeView',
   components: {
-    HelloWorld
+    Layout: defineAsyncComponent(() => import(/* webpackChunkName: "Layout" */ "@/layout/Layout.vue"))
   }
 }
 </script>
