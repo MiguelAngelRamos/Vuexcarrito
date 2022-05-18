@@ -6,12 +6,29 @@ export default createStore({
     carrito: {}
   },
   mutations: {
+
     setProductos(state, payload) {
       state.productos = payload
     },
     setCarrito(state, payload) {
       state.carrito[payload.id] = payload;
+    },
+    
+    setAumentar(state, payload) {
+      state.carrito[payload].cantidad = state.carrito[payload].cantidad + 1;
+    },
+    setDisminuir(state, payload) {
+      state.carrito[payload].cantidad = state.carrito[payload].cantidad - 1;
+
+      if(state.carrito[payload].cantidad == 0 ) {
+        delete state.carrito[payload]
+      }
+    },
+    setCancelarOrden(state) {
+      state.carrito = {};
     }
+
+
   },
   actions: {
     async getProductosApi({commit}) {
@@ -31,6 +48,12 @@ export default createStore({
     }
   },
   getters: {
+    totalCantidad(state) {
+      return Object.values(state.carrito).reduce((acc, { cantidad }) => acc + cantidad, 0);
+    },
+    totalPrecio(state) {
+      return Object.values(state.carrito).reduce((acc, { cantidad, precio }) => acc + (cantidad * precio), 0);
+    }
   },
   modules: {
   }

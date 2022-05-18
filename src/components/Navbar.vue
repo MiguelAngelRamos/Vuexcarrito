@@ -21,7 +21,7 @@
         </ul>
 
         <!-- icono del carrito de compras -->
-        <router-link class="carrito-container" to="/">
+        <router-link class="carrito-container" to="/carrito">
 
           <div class="carrito-icon">
             <!-- icono -->
